@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hizmetlerimiz</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        .container { max-width: 400px; margin: auto; }
+        .menu-list a { display: block; margin: 10px 0; padding: 10px; background: #4CAF50; color: white; text-decoration: none; border-radius: 5px; cursor: pointer; }
+        .footer { margin-top: 20px; }
+        .footer a { margin: 0 10px; }
+        .info-section { display: none; margin-top: 20px; padding: 10px; background: #f1f1f1; border-radius: 5px; text-align: left; }
+        .details { display: none; margin-top: 10px; padding: 10px; background: #f1f1f1; border-radius: 5px; text-align: left; }
+        .service-options a { display: block; margin: 10px 0; padding: 10px; background: #FF5733; color: white; text-decoration: none; border-radius: 5px; cursor: pointer; }
+        .service-buttons a { display: block; margin: 5px 0; padding: 10px; background: #007BFF; color: white; text-decoration: none; border-radius: 5px; cursor: pointer; }
+        .highlight-arrow { font-size: 20px; color: red; animation: bounce 1s infinite; display: inline-block; margin-left: 5px; }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="firma_logo.png" alt="Firma Logosu" width="300">
+        
+        <div class="menu-list">
+            <a onclick="toggleOnly('transport')">Nakliye</a>
+            <a onclick="redirectToWhatsApp('Merhaba, iş makinesi kiralamak istiyorum')">İş Makinesi Kiralama</a>
+            <a onclick="toggleOnly('software')">Yazılım</a>
+        </div>
+
+        <!-- Nakliye -->
+        <div id="transport" class="info-section">
+            <h2>Nakliye</h2>
+            <div class="service-options">
+                <a onclick="redirectToWhatsApp('Merhaba, Kamyonet nakliye hizmeti ile ilgileniyorum')">Kamyonet</a>
+                <a onclick="redirectToWhatsApp('Merhaba, Kamyon (10 Teker - 40 Ayak) nakliye hizmeti ile ilgileniyorum')">Kamyon (10 Teker - 40 Ayak)</a>
+                <a onclick="redirectToWhatsApp('Merhaba, Tır nakliye hizmeti ile ilgileniyorum')">Tır</a>
+            </div>
+        </div>
+
+        <!-- Yazılım -->
+        <div id="software" class="info-section">
+            <h2>Yazılım</h2>
+            <div class="service-buttons">
+                <a onclick="redirectToWhatsApp('Merhaba, Teknik Destek almak istiyorum')">Teknik Destek</a>
+                <a onclick="redirectToWhatsApp('Merhaba, Stok Takip Programı ile ilgileniyorum')">Stok Takip Programı</a>
+                <a onclick="redirectToWhatsApp('Merhaba, Muhasebe Programı ile ilgileniyorum')">Muhasebe Programı</a>
+                <a onclick="redirectToWhatsApp('Merhaba, GPS Araç Takip Programı ile ilgileniyorum')">GPS Araç Takip Programı</a>
+                <a onclick="redirectToWhatsApp('Merhaba, Özel Yazılım Programı ile ilgileniyorum')">Özel Yazılım Programı</a>
+            </div>
+        </div>
+
+        <div class="footer">
+            <a href="https://api.whatsapp.com/send/?phone=905357239545&text=Merhabalar%2C+muhasebe+departman%C4%B1na+ula%C5%9Fmak+istiyorum.&type=phone_number&app_absent=0">Muhasebe <span class="highlight-arrow">→</span></a>
+            <p>Lütfen ödeme yaptıktan sonra dekontu WhatsApp ile bizimle paylaşınız. Bizi tercih ettiğiniz için teşekkür ederiz.</p>
+        </div>
+    </div>
+
+    <script>
+        function toggleOnly(sectionId) {
+            const sections = document.querySelectorAll('.info-section');
+            sections.forEach(section => {
+                if (section.id === sectionId) {
+                    section.style.display = (section.style.display === 'none' || section.style.display === '') ? 'block' : 'none';
+                } else {
+                    section.style.display = 'none';
+                }
+            });
+        }
+
+        function redirectToWhatsApp(message) {
+            const phoneNumber = '905357239545';
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappUrl = `https://api.whatsapp.com/send/?phone=${phoneNumber}&text=${encodedMessage}&type=phone_number&app_absent=0`;
+            window.location.href = whatsappUrl;
+        }
+    </script>
+</body>
+</html>
